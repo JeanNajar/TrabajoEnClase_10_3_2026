@@ -137,6 +137,9 @@ public class EmpleadoManager {
         System.out.println("");
     }
     
+    
+    
+    
     private RandomAccessFile billsFileFor(int code) throws IOException {
         String dirPadre = employeeFolder(code);
         String dir = dirPadre + "/recibos.emp";
@@ -230,7 +233,7 @@ public class EmpleadoManager {
             Date   hireDate = new Date(remps.readLong());
             long   fired    = remps.readLong();
 
-            if (cod == code) {
+            if (cod == code && fired == 0)  {
                 empName     = name;
                 empSalary   = sal;
                 empHireDate = hireDate;
@@ -252,9 +255,9 @@ public class EmpleadoManager {
                 cal.get(Calendar.MONTH) + 1,
                 cal.get(Calendar.YEAR));
 
-        System.out.println("Codigo: "              + code);
-        System.out.println("Nombre: "              + empName);
-        System.out.println("Salario: "             + empSalary);
+        System.out.println("Codigo: "  + code);
+        System.out.println("Nombre: "    + empName);
+        System.out.println("Salario: "       + empSalary);
         System.out.println("Fecha de contratacion: " + fechaStr);
         
         
@@ -270,14 +273,14 @@ public class EmpleadoManager {
         }
         sales.close();
         
-         System.out.println("Total de ventas del año: " + totalVentas);
+         System.out.println("ventas del año: " + totalVentas);
          
            RandomAccessFile bills = billsFileFor(code);
         // suma de las cosas, long(8) + double(8) + double(8) + int(4) + int(4) = 32 bytes
         long totalRecibos = bills.length() / 32;
         bills.close();
 
-        System.out.println("Total de pagos realizados: " + totalRecibos);
+        System.out.println("pagos realizados: " + totalRecibos);
      }
          
 }
